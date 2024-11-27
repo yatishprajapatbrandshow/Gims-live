@@ -434,8 +434,8 @@ table, td { color: #000000; } #u_body a { color: #0000ee; text-decoration: under
         const otpSent = await otpServices.sendOTP(mobile);
         const sentMail = await nodemailer.sendMail(
           email,
-          "OTP for Registration",
-          `Your OTP for Registration is ${otpSent}`,
+          "Registration Successful",
+          `Your Password for login is ${password}`,
           htmlContent
         );
         return res.status(201).json({
