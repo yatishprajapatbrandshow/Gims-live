@@ -17,7 +17,7 @@ app.get("/health", (req, res) => {
   res.status(200).send("OK");
 });
 
-const { loginRouter, registerRouter, otpRouter } = require("./route");
+const { loginRouter, registerRouter, otpRouter, orderRouter, paymentRouter } = require("./route");
 
 // Register Route
 app.use("/api/register", registerRouter);
@@ -28,8 +28,11 @@ app.use("/api/login", loginRouter);
 // OTP Routes
 app.use("/api/otp", otpRouter);
 
+// Order Routes
+app.use("/order", orderRouter);
+
 // payment Routes
-// app.use("/payment", paymentRouter);
+app.use("/payment", paymentRouter);
 
 // Start the server
 const port = process.env.PORT || 3001;
