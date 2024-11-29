@@ -582,7 +582,6 @@ const updateUser = async (req, res) => {
     });
   }
 };
-
 const getUser = async (req, res) => {
   try {
     const { sid } = req.query;

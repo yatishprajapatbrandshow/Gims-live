@@ -29,10 +29,10 @@ app.use("/api/login", loginRouter);
 app.use("/api/otp", otpRouter);
 
 // Order Routes
-app.use("/order", orderRouter);
+app.use("/api/order", orderRouter);
 
 // payment Routes
-app.use("/payment", paymentRouter);
+app.use("/api/payment", paymentRouter);
 
 // Start the server
 const port = process.env.PORT || 3001;
