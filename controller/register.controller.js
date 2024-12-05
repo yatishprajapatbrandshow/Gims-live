@@ -653,6 +653,64 @@ const getUser = async (req, res) => {
       .json({ message: "An error occurred while fetching the user." });
   }
 };
+const search = async (req, res) => {
+  try {
+    const { search } = req.query;
+    // Find user by sid
+    const users = await Registration.find({
+      status: 1,
+      delete_flag: false,
+      name: { $regex: search, $options: "i" },
+    }).select(
+      "isVerified highestQualification collegeName city gender dob mobile email name sid"
+    );
+
+    if (!users) {
+      return res
+        .status(404)
+        .json({ status: false, message: "User not found.", data: false });
+    }
+
+    return res.status(200).json({
+      status: true,
+      message: "Users retrieved successfully.",
+      data: users,
+    });
+  } catch (error) {
+    console.error("Error fetching user: ", error);
+    return res
+      .status(500)
+      .json({ message: "An error occurred while fetching the user." });
+  }
+};
+const getUsers = async (req, res) => {
+  try {
+    // Find user by sid
+    const users = await Registration.find({
+      status: 1,
+      delete_flag: false,
+    }).select(
+      "isVerified highestQualification collegeName city gender dob mobile email name sid"
+    );
+
+    if (!users) {
+      return res
+        .status(404)
+        .json({ status: false, message: "User not found.", data: false });
+    }
+
+    return res.status(200).json({
+      status: true,
+      message: "Users retrieved successfully.",
+      data: users,
+    });
+  } catch (error) {
+    console.error("Error fetching user: ", error);
+    return res
+      .status(500)
+      .json({ message: "An error occurred while fetching the user." });
+  }
+};
 const generateUniqueId = async (existingIds) => {
   let id;
   do {
@@ -661,4 +719,4 @@ const generateUniqueId = async (existingIds) => {
   } while (existingIds.includes(id)); // Ensure the ID is unique
   return id;
 };
-module.exports = { register, updateUser, getUser };
+module.exports = { register, updateUser, getUser, getUsers ,search};

@@ -14,5 +14,10 @@ router.post("/update", registerController.updateUser);
 
 // Get User
 router.get("/get", registerController.getUser);
+// Get User
+router.get("/search", registerController.search);
+
+// Get Users
+router.get("/getAll", registerController.getUsers);
 
 module.exports = router;
